@@ -1,5 +1,7 @@
 Django==1.4.1
 PIL==1.1.7
+django-nose==1.1
 django-registration==0.8
 easy-thumbnails==1.1
+nose==1.2.1
 pytz==2012f

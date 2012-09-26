@@ -125,6 +125,7 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.admindocs',
 
+    'django_nose',
     'easy_thumbnails',
     'registration',
 
@@ -137,8 +138,12 @@ INSTALLED_APPS = (
 ACCOUNT_ACTIVATION_DAYS = 7
 
 LOGIN_REDIRECT_URL = '/identity/'
+LOGIN_URL = '/identity/sign-in/'
+LOGOUT_URL = '/identity/sign-out/'
 
 EMAIL_PORT = 1025
+
+TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 
 
 # A sample logging configuration. The only tangible logging
