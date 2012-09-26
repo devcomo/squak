@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% load i18n thumbnail i18n %}
+{% load url from future %}
+
+{% block content %}
+<div class="row">
+
+	{% if not squaks %}
+		<div class="span12">
+			<p>{% blocktrans with user=squak.owner.user.username %}
+				Sorry, {{ user }} has yet to squak!
+				{% endblocktrans %}
+			</p>
+		</div>
+
+	{% else %}
+		<div class="span12">
+			<h1>@{{ user.username }}</h1>
+			<p>{% blocktrans with join_date=user.date_joined %}
+					Member since {{ join_date }}
+				{% endblocktrans %}
+			</p>
+		</div>
+	{% endif %}
+
+	{% for squak in squaks %}
+	<div class="span12">
+		<div class="row">
+			<div class="span2">
+				<a href="{% url 'user-squak-list' username=squak.owner.user.username %}">
+					{% if squak.owner.photo %}
+					<img src="{% thumbnail squak.owner.photo 80x80 %}">
+					{% else %}
+						{{ squak.owner.user.username }}
+					{% endif %}
+				</a>
+			</div>
+			<div class="span10">
+				<div>
+					{{ squak.date_created }}
+				</div>
+				{{ squak.text }}
+			</div>
+		</div>
+		{% if not forloop.last %}<hr>{% endif %}
+	</div>
+	{% endfor %}
+
+	{% if is_paginated %}
+	<div class="paginate">
+		{% if page_obj.has_previous %}
+			<a id="previous" href="./?page={{ page_obj.previous_page_number }}" title="Newer Entries">previous<span></span></a>
+		{% endif %}
+
+		{% if page_obj.has_next %}
+			<a id="next" href="./?page={{ page_obj.next_page_number }}" title="Older Entries">next<span></span></a>
+		{% endif %}
+		<div style="clear:both"></div>
+	</div>
+	{% endif %}
+
+
+</div>
+
+{% endblock %}

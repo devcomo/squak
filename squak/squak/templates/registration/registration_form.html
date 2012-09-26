@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block content %}
+<div class="row">
+	<div class="span12">
+	<form action="." method="post">{% csrf_token %}
+		<fieldset>
+				<legend>{% trans "Register!" %}</legend>
+
+				{% for field in form %}
+					{% if field.is_hidden %}
+						{{ field }}
+					{% else %}
+						<div class="control-group{% if field.errors %} error{% endif %}">
+							<label class="control-label" for="id_{{ field.name }}">
+								{% if field.field.required %}<abbr title="Required">*</abbr>{% endif %}
+								{{ field.label|safe }}
+							</label>
+							<div class="controls">
+								{{ field }}
+								{% if field.errors %}
+									{% for error in field.errors %}
+									<span class="help-block">{{ error|safe }}</span>
+									{% endfor %}
+								{% else %}
+									{% if field.help_text and not field.value %}
+										<span class="help-block">{{ field.help_text|safe }}</span>
+									{% endif %}
+								{% endif %}
+							</div>
+						</div>
+					{% endif %}
+				{% endfor %}
+				<div class="form-actions">
+					<button type="submit" class="btn btn-primary">{% trans "Do it!" %}</button>
+				</div>
+		</fieldset>
+	</div>
+</div>
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+
+{% block content %}
+
+<div class="row">
+	<div class="span12">
+		<h1>{% trans "Something went wrong" %}</h1>
+		{% blocktrans with key=activation_key %}
+
+			<p>A problem occurred activating your account. If you believe this is in error, please shoot us an email and reference your activation key:</p>
+			<blockquote>
+				{{ key }}
+			</blockquote>
+		{% endblocktrans %}
+	</div>
+</div>
+
+{% endblock %}

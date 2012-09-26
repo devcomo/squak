@@ -1,0 +1,7 @@
+{% load url from future %}
+Thanks for joining the party!
+
+You have {{ expiration_days }} to click this link and start using squak!
+
+http://{{ site }}{% url 'registration_activate' activation_key=activation_key %}
+
