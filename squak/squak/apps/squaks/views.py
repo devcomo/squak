@@ -55,6 +55,7 @@ class SquakList(generic.ListView):
     model = models.Squak
     context_object_name = 'squaks'
     user = None
+    paginate_by = 5
 
     def get_queryset(self):
         """
@@ -80,8 +81,9 @@ class SquakList(generic.ListView):
         """
         Return the users identity info to the page if this is a user feed.
         """
+        # import ipdb; ipdb.set_trace()
         ctx = super(SquakList, self).get_context_data(**kwargs)
         if self.user:
-            ctx['user'] = self.user
+            ctx['squaker'] = self.user
         return ctx
 

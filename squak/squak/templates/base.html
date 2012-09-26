@@ -43,6 +43,7 @@
 					{% else %}
 					<li><a href="{% url 'profile' %}">{% trans 'Edit profile' %}</a></li>
 					<li><a href="{% url 'create-squak' %}">{% trans 'Create a squak!' %}</a></li>
+					<li><a href="{% url 'logout' %}">{% trans "Sign out" %}</a></li>
 					{% endif %}
 
 					{% comment %}
@@ -60,16 +61,6 @@
 					</li>
 					{% endcomment %}
 				</ul>
-
-				{% if not request.user.is_authenticated %}
-				{% comment %}
-				<form class="navbar-form pull-right">
-					<input class="span2" type="text" placeholder="Email">
-					<input class="span2" type="password" placeholder="Password">
-					<button type="submit" class="btn">Sign in</button>
-				</form>
-				{% endcomment %}
-				{% endif %}
 			</div><!--/.nav-collapse -->
 		</div>
 	</div>

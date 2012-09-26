@@ -12,14 +12,21 @@
 				{% endblocktrans %}
 			</p>
 		</div>
-
 	{% else %}
 		<div class="span12">
-			<h1>@{{ user.username }}</h1>
-			<p>{% blocktrans with join_date=user.date_joined %}
-					Member since {{ join_date }}
-				{% endblocktrans %}
-			</p>
+			<div class="row">
+				<div class="span6">
+					<h1>@{{ squaker.user.username }}</h1>
+					<p>{% blocktrans with join_date=squaker.user.date_joined|date:"DATETIME_FORMAT" %}
+							Member since {{ join_date }}
+						{% endblocktrans %}
+					</p>
+				</div>
+				<div class="span6">
+					<h3>{% trans "Bio" %}</h3>
+					{{ squaker.bio|urlizetrunc:40|linebreaks }}
+				</div>
+			</div>
 		</div>
 	{% endif %}
 
@@ -37,29 +44,18 @@
 			</div>
 			<div class="span10">
 				<div>
-					{{ squak.date_created }}
+					{{ squak.date_created|date:"DATETIME_FORMAT" }}
 				</div>
-				{{ squak.text }}
+				{{ squak.text|urlizetrunc:40|linebreaks }}
 			</div>
 		</div>
 		{% if not forloop.last %}<hr>{% endif %}
 	</div>
 	{% endfor %}
+</div>
 
 	{% if is_paginated %}
-	<div class="paginate">
-		{% if page_obj.has_previous %}
-			<a id="previous" href="./?page={{ page_obj.previous_page_number }}" title="Newer Entries">previous<span></span></a>
-		{% endif %}
-
-		{% if page_obj.has_next %}
-			<a id="next" href="./?page={{ page_obj.next_page_number }}" title="Older Entries">next<span></span></a>
-		{% endif %}
-		<div style="clear:both"></div>
-	</div>
+		{% include 'includes/pagination.html' with page_obj=page_obj %}
 	{% endif %}
-
-
-</div>
 
 {% endblock %}

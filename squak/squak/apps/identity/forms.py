@@ -35,6 +35,10 @@ class EditProfileForm(forms.ModelForm):
         field = self.fields['email']
         field.initial = self.instance.user.email
 
+        # set the widget for text to a Textarea
+        field = self.fields['bio']
+        field.widget = forms.Textarea()
+
     def clean_email(self):
         """
         Validate the email address

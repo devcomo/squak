@@ -23,3 +23,7 @@ class SquakForm(forms.ModelForm):
         super(SquakForm, self).__init__(**kwargs)
 
         self.instance.owner = owner
+
+        # set the widget for text to a Textarea
+        field = self.fields['text']
+        field.widget = forms.Textarea()
